@@ -1,0 +1,100 @@
+# ========================
+# Ambiente e segredos
+# ========================
+.env
+.env.*
+!.env.example          # permite o .env.example (sem valores secretos)
+
+# ========================
+# Ambientes virtuais
+# ========================
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ========================
+# Ferramentas e caches
+# ========================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+cython_debug/
+
+# ========================
+# IDEs e editores
+# ========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ========================
+# Sistema operacional
+# ========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ========================
+# Logs e arquivos temporários
+# ========================
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# ========================
+# Banco de dados local (se usar)
+# ========================
+*.db
+*.sqlite3
+*.sqlite
+
+# ========================
+# Outros (opcional)
+# ========================
+# node_modules/          # se tiver algum frontend
+# .next/                 # se usar Next.js
