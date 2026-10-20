@@ -28,6 +28,8 @@ def registrar_comando_motivo(bot):
                 ephemeral=True
             )
 
+        await interaction.response.defer(ephemeral=True)
+
         try:
             await message.add_reaction("✅")
         except discord.Forbidden:
@@ -140,7 +142,7 @@ def registrar_comando_motivo(bot):
                 f"{texto_novo}"
             )
 
-        await interaction.response.send_message(
+        await interaction.followup.send(
             "Verifique o chat de logs.",
             ephemeral=True
         )
