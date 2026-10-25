@@ -79,7 +79,6 @@ def registrar_evento_on_thread_create(
                     inline=False
                 )
                 await canal_logs.send(embed=embed)
-                await canal_logs.send("Treste funcionando")
             return
         #endregion
         #region Marcar Ping Recepcionistas
