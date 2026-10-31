@@ -1,4 +1,5 @@
 import discord
+from discord import app_commands
 from discord.ext import commands
 from discord.utils import get
 intents = discord.Intents.default()
@@ -133,7 +134,7 @@ registrar_comando_relembrar_pedir_acesso(
     bot,
     cargo_administrador,
     cargo_pedir_acesso,
-    chat_ticket,
+chat_ticket,
     chat_logs,
 )
 #endregion
