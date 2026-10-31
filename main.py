@@ -20,6 +20,20 @@ from config.IDs import *
 bot = commands.Bot(command_prefix=";", intents=intents, help_command=None)
 
 
+
+#region Outras Roles
+membros_ROLE = 1347727626525216902
+MA_ROLE = 1414415517619453982
+CC_ROLE = 1447060338242490561
+tempo_ROLE = 1518666285406359743
+novato_ROLE = 1439416754903322695
+forasteiros_ROLE = 1439416754903322695
+
+ver_chat_exp_ROLE = 1523156945287250053
+pedir_acesso_ROLE = 1517346084895195236
+a_verificar_temp = 1525955592202485910
+#endregion
+
 #region ------- 🗂️ Em outras pastas...
 #region---------------------------- prefix
 from comandos.prefix.basicos import registrar_comandos_basicos
@@ -338,6 +352,78 @@ from comandos.events.listeners.on_voice_state_update import (
     registrar_evento_on_voice_state_update,
 )
 registrar_evento_on_voice_state_update(bot)
+
+#region comando de acesso ao servidor
+
+class PainelAcesso(discord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=None)
+
+    @discord.ui.button(
+        label="Obter acesso",
+        style=discord.ButtonStyle.green,
+        custom_id="liberar_acesso"
+    )
+    async def liberar_acesso(
+        self,
+        interaction: discord.Interaction,
+        button: discord.ui.Button
+    ):
+
+        guild = interaction.guild
+        member = interaction.user
+        
+        # Cargos que serão adicionados
+        cargos_adicionar = [
+            membros_ROLE,
+            MA_ROLE,
+            CC_ROLE,
+            tempo_ROLE,
+            novato_ROLE,
+            forasteiros_ROLE
+        ]
+
+        # Cargos que serão removidos
+        cargos_remover = [
+            ver_chat_exp_ROLE,
+            pedir_acesso_ROLE,
+            a_verificar_temp
+        ]
+
+        # Adiciona os cargos
+        for role_id in cargos_adicionar:
+            role = guild.get_role(role_id)
+
+            if role is not None:
+                await member.add_roles(role)
+
+        # Remove os cargos
+        for role_id in cargos_remover:
+            role = guild.get_role(role_id)
+
+            if role is not None:
+                await member.remove_roles(role)
+
+        await interaction.response.send_message(
+            "Seu acesso foi liberado!",
+            ephemeral=True
+        )   
+
+        canal = bot.get_channel(chat_conversas)
+
+        await canal.send(f"{member.mention} entrou no servidor")
+
+
+@bot.tree.command(
+    name="dar_acesso",
+    description="Envia o painel de acesso"
+)
+@app_commands.default_permissions(manage_roles=True)
+async def painel_acesso(interaction: discord.Interaction):
+    await interaction.response.send_message(
+        "Clique abaixo para liberar seu acesso.",
+        view=PainelAcesso()
+    )
 
 #region Marcar @ver_chat_explicação automaticamente
 @tasks.loop(time=time(hour=20, minute=0, tzinfo=ZoneInfo("America/Sao_Paulo")))
