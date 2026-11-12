@@ -844,7 +844,7 @@ async def on_ready():
     if channel is not None:
         await channel.send(
             f"""🟢 "E foi feito alma vivente".
--# 📁 `Focus {VERSAO_ATUAL}`"""
+-# 📁 `Focus v-3`"""
         )
 
     await verificar_thread_sapphire(bot)

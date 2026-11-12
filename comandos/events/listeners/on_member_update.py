@@ -13,6 +13,7 @@ from comandos.events.topico_privado_automatico import (
     criar_topico_privado_automatico,
 )
 from comandos.prefix.chat import obter_ou_criar_chat
+from comandos.events.cargo_de_selo import processar_cargo_de_selo
 from config.IDs import (
     cargo_destaque_do_dia,
     cargo_pedir_acesso,
@@ -103,3 +104,6 @@ def registrar_evento_on_member_update(bot):
             cargo_destaque_do_dia,
             chat_thread_ddd_logs
         )
+
+        #---------------------------- Cargos de SELO
+        await processar_cargo_de_selo(before, after)

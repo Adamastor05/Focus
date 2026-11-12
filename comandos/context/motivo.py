@@ -5,9 +5,9 @@ import discord
 from discord import app_commands
 
 from config.IDs import (
-    cargo_genero_nao_informado,
-    cargo_homem,
-    cargo_mulher,
+    CARGO_GENERO_NAO_INFORMADO,
+    CARGO_HOMEM,
+    CARGO_MULHER,
     cargo_recepcionista,
     chat_convites,
     chat_logs_thread_motivos,
@@ -79,13 +79,13 @@ def registrar_comando_motivo(bot):
 
         # ---------------- Gênero ----------------
 
-        if any(r.id == cargo_homem for r in membro.roles):
+        if any(r.id == CARGO_HOMEM for r in membro.roles):
             genero = "Homem"
 
-        elif any(r.id == cargo_mulher for r in membro.roles):
+        elif any(r.id == CARGO_MULHER for r in membro.roles):
             genero = "Mulher"
 
-        elif any(r.id == cargo_genero_nao_informado for r in membro.roles):
+        elif any(r.id == CARGO_GENERO_NAO_INFORMADO for r in membro.roles):
             genero = "Gênero não informado"
 
         else:
