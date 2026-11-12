@@ -363,4 +363,7 @@ async def lembrete_chat_explicacao():
 import comandos.events.contador_emojis
 comandos.events.contador_emojis.registrar(bot)
 
+import comandos.events.booster_logs
+comandos.events.booster_logs.setup(bot)
+
 bot.run(TOKEN)
