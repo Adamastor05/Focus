@@ -2,7 +2,6 @@ import discord
 
 from config.IDs import chat_logs, ping_staff
 
-
 def registrar_evento_on_message(bot):
     @bot.event
     async def on_message(message: discord.Message):

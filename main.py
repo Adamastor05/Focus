@@ -173,7 +173,7 @@ registrar_comando_alterar_apelido(
 #region 📅agendar_mensagens
 #endregion
 #region 🔵sapphire threads, apagar
-from comandos.events.sapphire_thread import (
+from comandos.events.apagar_sapphire_thread import (
     on_thread_create,
     verificar_thread_sapphire
 )
@@ -360,5 +360,7 @@ async def lembrete_chat_explicacao():
         pass
 #endregion
 
+import comandos.events.contador_emojis
+comandos.events.contador_emojis.registrar(bot)
 
 bot.run(TOKEN)

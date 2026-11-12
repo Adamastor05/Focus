@@ -4,7 +4,7 @@ import asyncio
 from comandos.events.agendar_mensagens import iniciar_agendador
 from comandos.events.aparicoes_diarias import iniciar_tarefa_aparicoes_diarias
 from comandos.events.prodigos import iniciar_tarefa_prodigos
-from comandos.events.sapphire_thread import verificar_thread_sapphire
+from comandos.events.apagar_sapphire_thread import verificar_thread_sapphire
 from config.IDs import chat_conversas, chat_logs, chat_thread_agendar_msgs
 from config.versao import VERSAO_ATUAL
 
