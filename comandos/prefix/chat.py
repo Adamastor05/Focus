@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands
 
 from config.IDs import (
-    cargo_administrador,
-    cargo_moderador,
+    CARGO_ADM,
+    CARGO_MODERADOR,
     chat_conversas,
     chat_logs,
     conquista_a_fundacao,
@@ -148,7 +148,7 @@ async def obter_ou_criar_chat(
 
 
 def eh_staff(membro: discord.Member) -> bool:
-    cargos_staff = {cargo_moderador, cargo_administrador}
+    cargos_staff = {CARGO_MODERADOR, CARGO_ADM}
     return any(cargo.id in cargos_staff for cargo in membro.roles)
 
 

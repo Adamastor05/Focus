@@ -5,7 +5,7 @@ from discord.ext import commands
 
 def registrar_comando_limpar_dm(
     bot: commands.Bot,
-    cargo_moderador_id: int,
+    CARGO_MODERADOR: int,
 ) -> None:
     @bot.tree.command(
         name="limpar_dm",
@@ -19,7 +19,7 @@ def registrar_comando_limpar_dm(
         membro: discord.Member,
     ) -> None:
         if not any(
-            cargo.id == cargo_moderador_id
+            cargo.id == CARGO_MODERADOR
             for cargo in interaction.user.roles
         ):
             await interaction.response.send_message(

@@ -818,8 +818,8 @@ async def executar_verificacao_prodigos(
 
 def registrar_comando_prodigos(
     bot,
-    cargo_administrador,
-    cargo_focus_adm,
+    CARGO_ADM,
+    CARGO_FOCUS_ADM,
 ):
     """
     Registra:
@@ -881,8 +881,8 @@ def registrar_comando_prodigos(
         }
 
         if (
-            cargo_administrador not in cargos
-            and cargo_focus_adm not in cargos
+            CARGO_ADM not in cargos
+            and CARGO_FOCUS_ADM not in cargos
         ):
 
             await interaction.response.send_message(

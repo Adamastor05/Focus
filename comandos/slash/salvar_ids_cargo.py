@@ -10,7 +10,7 @@ from discord.ext import commands
 
 def registrar_comando_salvar_ids_cargo(
     bot: commands.Bot,
-    cargo_administrador: int,
+    CARGO_ADM: int,
     chat_logs: int,
 ) -> None:
     @bot.tree.command(
@@ -32,7 +32,7 @@ def registrar_comando_salvar_ids_cargo(
             return
 
         if not any(
-            role.id == cargo_administrador
+            role.id == CARGO_ADM
             for role in interaction.user.roles
         ):
             await interaction.response.send_message(

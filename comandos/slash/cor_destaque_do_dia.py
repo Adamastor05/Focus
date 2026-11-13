@@ -99,12 +99,12 @@ class ViewConfigurarDestaque(discord.ui.View):
         self,
         cargo: discord.Role,
         cargo_destaque_id: int,
-        cargo_administrador_id: int,
+        CARGO_ADM: int,
     ):
         super().__init__(timeout=None)
         self.cargo = cargo
         self.cargo_destaque_id = cargo_destaque_id
-        self.cargo_administrador_id = cargo_administrador_id
+        self.CARGO_ADM = CARGO_ADM
 
     @discord.ui.button(
         label="Salvar",
@@ -126,7 +126,7 @@ class ViewConfigurarDestaque(discord.ui.View):
             return
 
         cargo_destaque_role = guild.get_role(self.cargo_destaque_id)
-        cargo_adm_role = guild.get_role(self.cargo_administrador_id)
+        cargo_adm_role = guild.get_role(self.CARGO_ADM)
         cargos_usuario = interaction.user.roles
         autorizado = (
             cargo_destaque_role in cargos_usuario
@@ -147,7 +147,7 @@ class ViewConfigurarDestaque(discord.ui.View):
 def registrar_comando_cor_destaque_do_dia(
     bot: commands.Bot,
     cargo_destaque_do_dia_id: int,
-    cargo_administrador_id: int,
+    CARGO_ADM: int,
 ) -> None:
     @bot.tree.command(
         name="cor_destaque_do_dia",
@@ -165,7 +165,7 @@ def registrar_comando_cor_destaque_do_dia(
             return
 
         cargo_destaque_role = guild.get_role(cargo_destaque_do_dia_id)
-        cargo_adm_role = guild.get_role(cargo_administrador_id)
+        cargo_adm_role = guild.get_role(CARGO_ADM)
 
         if cargo_destaque_role is None:
             await interaction.response.send_message(
@@ -207,7 +207,7 @@ def registrar_comando_cor_destaque_do_dia(
         view = ViewConfigurarDestaque(
             cargo_destaque_role,
             cargo_destaque_do_dia_id,
-            cargo_administrador_id,
+            CARGO_ADM,
         )
         await interaction.response.send_message(
             embeds=[embed1, embed2],

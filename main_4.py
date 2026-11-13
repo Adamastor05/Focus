@@ -217,7 +217,7 @@ from comandos.events.analise_de_imagens import (
 )
 #endregion
 #region 🔵sapphire threads, apagar
-from comandos.events.sapphire_thread import (
+from comandos.events.apagar_sapphire_thread import (
     on_thread_create,
     verificar_thread_sapphire
 )

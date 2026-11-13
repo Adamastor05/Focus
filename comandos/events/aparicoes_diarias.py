@@ -889,8 +889,8 @@ async def registrar_aparicoes(
 
 def registrar_aparicoes_diarias(
     bot,
-    cargo_administrador,
-    cargo_focus_adm,
+    CARGO_ADM,
+    CARGO_FOCUS_ADM,
 ):
 
     grupo = app_commands.Group(
@@ -935,8 +935,8 @@ def registrar_aparicoes_diarias(
         }
 
         if (
-            cargo_administrador not in cargos
-            and cargo_focus_adm not in cargos
+            CARGO_ADM not in cargos
+            and CARGO_FOCUS_ADM not in cargos
         ):
 
             await interaction.response.send_message(

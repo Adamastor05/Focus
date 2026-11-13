@@ -40,8 +40,8 @@ from comandos.slash.desligar_focus import registrar_comando_desligar_focus
 registrar_comando_desligar_focus(
     bot,
     chat_logs,
-    cargo_focus_adm,
-    cargo_administrador
+    CARGO_FOCUS_ADM,
+    CARGO_ADM
 )
 #endregion
 #region 👥👥adicionar_cargo_em_massa
@@ -50,8 +50,8 @@ from comandos.slash.adicionar_cargo_em_massa import (
 )
 registrar_comando_adicionar_cargo_em_massa(
     bot,
-    cargo_focus_adm,
-    cargo_administrador,
+    CARGO_FOCUS_ADM,
+    CARGO_ADM,
     chat_logs
 )
 #endregion
@@ -61,8 +61,8 @@ from comandos.slash.mensagem_do_dia import (
 )
 registrar_comando_mensagem_do_dia(
     bot,
-    cargo_focus_adm,
-    cargo_administrador,
+    CARGO_FOCUS_ADM,
+    CARGO_ADM,
     chat_mensagem_do_dia,
     chat_logs
 )
@@ -72,7 +72,7 @@ from comandos.slash.mensagem_pv import (
     registrar_comando_mensagem_pv
 )
 registrar_comando_mensagem_pv(
-    cargo_moderador=cargo_moderador,
+    CARGO_MODERADOR=CARGO_MODERADOR,
     bot=bot,
     chat_logs=chat_logs
 )
@@ -81,14 +81,14 @@ registrar_comando_mensagem_pv(
 from comandos.slash.limpar_dm import registrar_comando_limpar_dm
 registrar_comando_limpar_dm(
     bot,
-    cargo_moderador,
+    CARGO_MODERADOR,
 )
 #endregion
 #region Remover cargo de todos
 from comandos.slash.remove_role_all import registrar_comando_remove_role_all
 registrar_comando_remove_role_all(
     bot,
-    cargo_administrador,
+    CARGO_ADM,
 )
 #endregion
 #region Transferir cargos em massa
@@ -97,7 +97,7 @@ from comandos.slash.transferir_cargo_em_massa import (
 )
 registrar_comando_transferir_cargo_em_massa(
     bot,
-    cargo_administrador,
+    CARGO_ADM,
     chat_logs,
 )
 #endregion
@@ -107,7 +107,7 @@ from comandos.slash.adicionar_cargo_3d import (
 )
 registrar_comando_adicionar_cargo_3d(
     bot,
-    cargo_administrador,
+    CARGO_ADM,
     chat_logs,
 )
 #endregion
@@ -117,7 +117,7 @@ from comandos.slash.relembrar_pedir_acesso import (
 )
 registrar_comando_relembrar_pedir_acesso(
     bot,
-    cargo_administrador,
+    CARGO_ADM,
     cargo_pedir_acesso,
     chat_ticket,
     chat_logs,
@@ -154,7 +154,7 @@ from comandos.slash.cor_destaque_do_dia import (
 registrar_comando_cor_destaque_do_dia(
     bot,
     cargo_destaque_do_dia,
-    cargo_administrador,
+    CARGO_MODERADOR,
 )
 #endregion
 #region Alterar apelido
@@ -186,8 +186,8 @@ from comandos.events.aparicoes_diarias import (
 
 registrar_aparicoes_diarias(
     bot,
-    cargo_administrador,
-    cargo_focus_adm
+    CARGO_ADM,
+    CARGO_FOCUS_ADM
 )
 
 #endregion
@@ -198,8 +198,8 @@ from comandos.events.prodigos import (
 
 registrar_comando_prodigos(
     bot,
-    cargo_administrador,
-    cargo_focus_adm,
+    CARGO_ADM,
+    CARGO_FOCUS_ADM,
 )
 #endregion
 #endregion
@@ -218,7 +218,7 @@ registrar_comando_prefix_chat(bot)
 from comandos.prefix.registro import registrar_comando_prefix_registro
 registrar_comando_prefix_registro(
     bot,
-    cargo_moderador,
+    CARGO_MODERADOR,
     chat_registro,
 )
 #endregion
@@ -228,7 +228,7 @@ registrar_comando_prefix_registro(
 from comandos.prefix.registrom import registrar_comando_prefix_registrom
 registrar_comando_prefix_registrom(
     bot,
-    cargo_moderador,
+    CARGO_MODERADOR,
     chat_registro,
     asyncio,
 )
@@ -240,7 +240,7 @@ registrar_comando_mensagem(
     bot,
     discord,
     re,
-    cargo_moderador,
+    CARGO_MODERADOR,
     cargo_recepcionista,
     chat_logs,
 )
@@ -251,7 +251,7 @@ registrar_comando_mensagem(
 from comandos.slash.salvar_ids_cargo import registrar_comando_salvar_ids_cargo
 registrar_comando_salvar_ids_cargo(
     bot,
-    cargo_administrador,
+    CARGO_ADM,
     chat_logs,
 )
 #endregion
@@ -261,9 +261,12 @@ registrar_comando_salvar_ids_cargo(
 from comandos.slash.criar_convite import registrar_comando_criar_convite
 registrar_comando_criar_convite(
     bot,
-    cargo_administrador
+    CARGO_ADM
 )
 #endregion
+
+import comandos.slash.analisar_foto_perfil
+comandos.slash.analisar_foto_perfil.setup(bot)
 
 #region -------------- Registros de eventos
 from comandos.events.listeners.on_ready import registrar_evento_on_ready
@@ -290,7 +293,7 @@ from comandos.events.entrada_membros import criar_ticket_entrada
 from comandos.slash.criar_ticket import registrar_comando_criar_ticket
 registrar_comando_criar_ticket(
     bot,
-    cargo_moderador,
+    CARGO_MODERADOR,
     criar_ticket_entrada,
 )
 #endregion
@@ -313,7 +316,7 @@ from comandos.slash.verificar_a_verificar import (
 )
 registrar_comando_verificar_a_verificar(
     bot,
-    cargo_moderador,
+    CARGO_MODERADOR,
     a_verificar,
     cargo_conta_suspeita,
     cargo_pedir_acesso,

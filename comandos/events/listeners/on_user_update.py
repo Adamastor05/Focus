@@ -5,7 +5,7 @@ import discord
 from google import genai
 from google.genai import types
 
-from config.IDs import cargo_moderador, chat_logs_thread_fotos
+from config.IDs import CARGO_MODERADOR, chat_logs_thread_fotos
 from gemini_manager import proxima_api, marcar_api_como_indisponivel
 
 
@@ -251,7 +251,7 @@ def registrar_evento_on_user_update(bot):
             )
 
             # PEGAR O CARGO DE MODERADOR
-            role = guild.get_role(cargo_moderador)
+            role = guild.get_role(CARGO_MODERADOR)
 
             # PEGAR O CANAL/THREAD DE LOG
             canal_logs = guild.get_thread(

@@ -117,7 +117,7 @@ class ViewExpulsar(discord.ui.View):
 
 def registrar_comando_verificar_a_verificar(
     bot: commands.Bot,
-    cargo_moderador_id: int,
+    CARGO_MODERADOR: int,
     a_verificar_id: int,
     cargo_conta_suspeita_id: int,
     cargo_pedir_acesso_id: int,
@@ -140,7 +140,7 @@ def registrar_comando_verificar_a_verificar(
             return
 
         if not any(
-            role.id == cargo_moderador_id
+            role.id == CARGO_MODERADOR
             for role in interaction.user.roles
         ):
             await interaction.response.send_message(

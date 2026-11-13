@@ -5,7 +5,7 @@ from discord.ext import commands
 
 def registrar_comando_criar_ticket(
     bot: commands.Bot,
-    cargo_moderador: int,
+    CARGO_MODERADOR: int,
     criar_ticket_entrada,
 ) -> None:
     @bot.tree.command(
@@ -20,7 +20,7 @@ def registrar_comando_criar_ticket(
         usuario: discord.Member,
     ) -> None:
         if not any(
-            cargo.id == cargo_moderador
+            cargo.id == CARGO_MODERADOR
             for cargo in interaction.user.roles
         ):
             await interaction.response.send_message(

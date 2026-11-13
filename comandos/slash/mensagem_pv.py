@@ -3,7 +3,7 @@ from discord import app_commands
 
 
 def registrar_comando_mensagem_pv(
-    cargo_moderador,
+    CARGO_MODERADOR,
     bot,
     chat_logs
 ):
@@ -44,7 +44,7 @@ def registrar_comando_mensagem_pv(
         mensagem: str = None
     ):
 
-        if cargo_moderador not in [cargo.id for cargo in interaction.user.roles]:
+        if CARGO_MODERADOR not in [cargo.id for cargo in interaction.user.roles]:
             await interaction.response.send_message(
                 "❌ Você não tem permissão para usar este comando.",
             ephemeral=True

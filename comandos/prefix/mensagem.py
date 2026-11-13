@@ -3,13 +3,13 @@ def registrar_comando_mensagem(
     bot,
     discord,
     re,
-    cargo_moderador,
+    CARGO_MODERADOR,
     cargo_recepcionista,
     chat_logs,
 ):
     @bot.command(name="mensagem", aliases=["m"])
     async def mensagem(ctx, *, texto=None):
-        if not any(role.id in (cargo_moderador, cargo_recepcionista) for role in ctx.author.roles):
+        if not any(role.id in (CARGO_MODERADOR, cargo_recepcionista) for role in ctx.author.roles):
             await ctx.reply(
                 "Você não tem permissão para usar este comando.",
                 mention_author=False,

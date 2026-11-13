@@ -1,12 +1,12 @@
 
 def registrar_comando_prefix_registro(
     bot,
-    cargo_moderador,
+    CARGO_MODERADOR,
     chat_registro
 ):
     @bot.command(name="registro", aliases=["r"])
     async def registro(ctx, user_id: str):
-        if cargo_moderador not in [role.id for role in ctx.author.roles]:
+        if CARGO_MODERADOR not in [role.id for role in ctx.author.roles]:
             return
         forum = bot.get_channel(chat_registro)
 

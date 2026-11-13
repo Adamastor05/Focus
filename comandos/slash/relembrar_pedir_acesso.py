@@ -6,7 +6,7 @@ from discord.ext import commands
 
 def registrar_comando_relembrar_pedir_acesso(
     bot: commands.Bot,
-    cargo_administrador: int,
+    CARGO_ADM: int,
     cargo_pedir_acesso: int,
     chat_ticket: int,
     chat_logs: int,
@@ -26,7 +26,7 @@ def registrar_comando_relembrar_pedir_acesso(
             return
 
         if not any(
-            role.id == cargo_administrador
+            role.id == CARGO_ADM
             for role in interaction.user.roles
         ):
             await interaction.response.send_message(

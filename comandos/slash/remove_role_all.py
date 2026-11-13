@@ -8,7 +8,7 @@ from discord.ext import commands
 
 def registrar_comando_remove_role_all(
     bot: commands.Bot,
-    cargo_administrador_id: int,
+    CARGO_ADM: int,
 ) -> None:
     @bot.tree.command(
         name="remove_role_all",
@@ -22,7 +22,7 @@ def registrar_comando_remove_role_all(
         cargo: discord.Role,
     ) -> None:
         if not any(
-            role.id == cargo_administrador_id
+            role.id == CARGO_ADM
             for role in interaction.user.roles
         ):
             await interaction.response.send_message(

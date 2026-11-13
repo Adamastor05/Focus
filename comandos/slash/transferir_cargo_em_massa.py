@@ -5,7 +5,7 @@ from discord.ext import commands
 
 def registrar_comando_transferir_cargo_em_massa(
     bot: commands.Bot,
-    cargo_administrador_id: int,
+    CARGO_ADM: int,
     chat_logs_id: int,
 ) -> None:
     @bot.tree.command(
@@ -37,7 +37,7 @@ def registrar_comando_transferir_cargo_em_massa(
             return
 
         if not any(
-            role.id == cargo_administrador_id
+            role.id == CARGO_ADM
             for role in interaction.user.roles
         ):
             await interaction.response.send_message(

@@ -4,13 +4,13 @@ from discord import app_commands
 
 def registrar_comando_criar_convite(
     bot,
-    cargo_administrador: int
+    CARGO_ADM: int
 ):
     @bot.tree.command(name="criar_convite", description="Cria um convite permanente para um canal.")
     @app_commands.describe(canal="Canal onde o convite será criado")
     async def criar_convite(interaction: discord.Interaction, canal: discord.TextChannel):
 
-        if cargo_administrador not in [cargo.id for cargo in interaction.user.roles]:
+        if CARGO_ADM not in [cargo.id for cargo in interaction.user.roles]:
             await interaction.response.send_message(
                 "❌ Você não tem permissão para usar este comando.",
                 ephemeral=True

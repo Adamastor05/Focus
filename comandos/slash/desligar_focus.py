@@ -6,8 +6,8 @@ import asyncio
 
 def registrar_comando_desligar_focus(
     bot,
-    cargo_focus_adm_id,
-    cargo_administrador_id,
+    CARGO_FOCUS_ADM,
+    CARGO_ADM,
     chat_logs
 ):
 
@@ -37,8 +37,8 @@ def registrar_comando_desligar_focus(
         ]
 
         if (
-            cargo_focus_adm_id not in cargos_usuario
-            and cargo_administrador_id not in cargos_usuario
+            CARGO_FOCUS_ADM not in cargos_usuario
+            and CARGO_ADM not in cargos_usuario
         ):
             await interaction.response.send_message(
                 "❌ Você não possui permissão para desligar o Focus.",
