@@ -79,3 +79,28 @@ async def analisar_imagem(
     )
 
     return resposta.choices[0].message.content
+
+async def analisar_texto(prompt: str):
+    """
+    Envia apenas texto para a Groq (sem imagem).
+    O prompt também fica fora deste arquivo.
+    """
+
+    resposta = await groq_client.chat.completions.create(
+        model="qwen/qwen3.6-27b",
+
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+
+        temperature=0,
+
+        response_format={
+            "type": "json_object"
+        }
+    )
+
+    return resposta.choices[0].message.content

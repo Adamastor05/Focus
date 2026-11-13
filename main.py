@@ -369,4 +369,7 @@ comandos.events.contador_emojis.registrar(bot)
 import comandos.events.booster_logs
 comandos.events.booster_logs.setup(bot)
 
+import comandos.events.analisar_mdd
+comandos.events.analisar_mdd.setup(bot)
+
 bot.run(TOKEN)
