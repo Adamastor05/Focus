@@ -269,9 +269,7 @@ import comandos.slash.analisar_foto_perfil
 comandos.slash.analisar_foto_perfil.setup(bot)
 
 #region -------------- Registros de eventos
-from comandos.events.listeners.on_ready import registrar_evento_on_ready
-registrar_evento_on_ready(bot)
-
+# aqui ficava o on_ready
 
 from comandos.events.listeners.on_thread_create import registrar_evento_on_thread_create
 registrar_evento_on_thread_create(
@@ -371,5 +369,12 @@ comandos.events.booster_logs.setup(bot)
 
 import comandos.events.analisar_mdd
 comandos.events.analisar_mdd.setup(bot)
+
+import sistemas.manipular_cargos.slash.salvar_cargos_thread
+sistemas.manipular_cargos.slash.salvar_cargos_thread.setup(bot)
+# e lembre de dar o sync da árvore (await bot.tree.sync()) depois de registrar
+
+from comandos.events.listeners.on_ready import registrar_evento_on_ready
+registrar_evento_on_ready(bot)
 
 bot.run(TOKEN)

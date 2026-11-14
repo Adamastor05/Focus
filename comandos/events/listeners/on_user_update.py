@@ -59,6 +59,7 @@ async def analisar_foto_com_gemini(
         - Não confunda simplesmente "representar" algo com "promover, fazer apologia
         ou incentivar" algo.
         - Não invente elementos que não estão visíveis na imagem.
+        - Para conteúdo sugestivo, considere também homens e mulheres sem camisa.
         - Para racismo, considere símbolos, textos ou imagens claramente
         discriminatórios ou de supremacia racial.
         - Para violência, não marque alto apenas porque existe uma arma ou uma cena
