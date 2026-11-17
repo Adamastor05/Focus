@@ -27,8 +27,8 @@ def registrar_evento_on_ready(bot):
 
         if channel is not None:
             await channel.send(
-                f"""🟢 "E foi feito alma vivente."
--# 📁 `Focus {VERSAO_ATUAL}`"""
+                f"""🟢 "E foi feito alma vivente." — Gn 2.7b
+-# 📁** `Focus {VERSAO_ATUAL}` **"""
             )
 
         await verificar_thread_sapphire(bot)
