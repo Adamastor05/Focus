@@ -1,16 +1,18 @@
-
 import asyncio
 
 from comandos.events.agendar_mensagens import iniciar_agendador
 from comandos.events.aparicoes_diarias import iniciar_tarefa_aparicoes_diarias
 from comandos.events.prodigos import iniciar_tarefa_prodigos
 from comandos.events.apagar_sapphire_thread import verificar_thread_sapphire
+from sistemas.entrada.acesso_ao_servidor import registrar as registrar_acesso   # v3.2
+from sistemas.entrada.botao_acesso import registrar_botao_acesso                 # v3.2
 from config.IDs import chat_conversas, chat_logs, chat_thread_agendar_msgs
 from config.versao import VERSAO_ATUAL
 
 
 agendador_mensagens_task = None
 aparicoes_diarias_task = None
+acesso_registrado = False                                                      # v3.2
 
 
 def registrar_evento_on_ready(bot):
@@ -18,6 +20,13 @@ def registrar_evento_on_ready(bot):
     async def on_ready():
 
         global agendador_mensagens_task
+        global acesso_registrado                                               # v3.2
+
+        # NOVO: registrar antes do sync (on_ready pode rodar mais de uma vez)
+        if not acesso_registrado:
+            acesso_registrado = True
+            registrar_acesso(bot)
+            await registrar_botao_acesso(bot)
 
         await bot.tree.sync()
 
@@ -33,10 +42,7 @@ def registrar_evento_on_ready(bot):
 
         await verificar_thread_sapphire(bot)
 
-        # ============================================================
         # AGENDADOR DE MENSAGENS
-        # ============================================================
-
         if (
             agendador_mensagens_task is None
             or agendador_mensagens_task.done()

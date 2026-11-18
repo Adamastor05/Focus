@@ -67,36 +67,6 @@ def registrar_evento_on_member_update(bot):
                 mensagem
             )
 
-        # Perdeu o cargo pedir acesso
-        if (
-            cargo_pedir_acesso in cargos_antes
-            and cargo_pedir_acesso not in cargos_depois
-        ):
-
-            asyncio.create_task(
-                criar_topico_privado_automatico(
-                after.guild,
-                after,
-                obter_ou_criar_chat
-            )
-            )
-
-            mensagem = f"<@{after.id}> acessou o servidor."
-
-            await procurar_topico_e_enviar(
-                after.guild,
-                after,
-                chat_convites,
-                mensagem
-            )
-
-            await procurar_topico_e_enviar(
-                after.guild,
-                after,
-                chat_ticket,
-                mensagem
-            )
-
         await verificar_destaque_do_dia(
             bot,
             before,

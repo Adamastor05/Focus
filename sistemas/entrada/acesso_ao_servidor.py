@@ -31,6 +31,17 @@ from config.IDs import (
     CHAT_LOGS_COMPOSTO,  # lista de ids de chats
     CHAT_PAINEL_DE_CONFIGURACAO,
     CHAT_REGRAS_TICKET_DE_ENTRADA,
+    CARGO_PEDIR_ACESSO,
+    CARGO_A_VERIFICAR,
+    CARGO_VER_CHAT_EXPLICACAO,
+    CARGO_CC_CRIAR_CONVITE,
+    CARGO_MEMBROS,
+    CARGO_DIVISORIA_CARACTERISTICAS,
+    CARGO_DIVISORIA_CONQUISTAS,
+    CARGO_DIVISORIA_PINGS,
+    CARGO_TEMPO,
+    CARGO_NOVATOS,
+    SAPPHIRE
 )
 
 logger = logging.getLogger(__name__)
@@ -41,15 +52,28 @@ logger = logging.getLogger(__name__)
 
 # Cargos que serão aplicados à pessoa quando ela acessar o servidor.
 LISTA_CARGOS_APLICAR: list[int] = [
-    # 123456789012345678,
+    CARGO_CC_CRIAR_CONVITE,
+    CARGO_MEMBROS,
+    CARGO_DIVISORIA_CARACTERISTICAS,    
+    CARGO_DIVISORIA_CONQUISTAS,
+    CARGO_DIVISORIA_PINGS,
+    CARGO_TEMPO,
+    CARGO_NOVATOS
 ]
+# Cargos que serão REMOVIDOS da pessoa quando ela acessar o servidor.
+LISTA_CARGOS_REMOVER: list[int] = [
+    CARGO_PEDIR_ACESSO,
+    CARGO_A_VERIFICAR,
+    CARGO_VER_CHAT_EXPLICACAO
+]
+
 
 # Cargo marcado na thread de acolhimento.
 CARGO_ACOLHIMENTO = 1555543123638231120
 
 # Id do bot SAPPHIRE (usado para achar a mensagem de entrada como alternativa).
 # Se deixar 0, o bot procura por autor bot com "sapphire" no nome.
-ID_BOT_SAPPHIRE = 0
+#ID_BOT_SAPPHIRE = 0 - Edit: importei do config.IDs
 
 FRASE_BOTAO_ACESSO = "Clique no botão abaixo para acessar o servidor."
 
@@ -101,11 +125,31 @@ def _embed_boas_vindas_base(usuario: discord.Member) -> discord.Embed:
 
 
 def embed_boas_vindas_homem(usuario: discord.Member) -> discord.Embed:
-    return _embed_boas_vindas_base(usuario)
+    embed_boas_vindas_homem = discord.Embed(
+        title="Boas-vindas! É uma alegria ter você conosco.",
+        description=(
+            """ Nosso objetivo é que este servidor seja um espaço de **comunhão** e **crescimento** na sua caminhada com Cristo. Embora nossa base teológica seja **protestante**, nossas portas estão abertas para todos que buscam aprender mais sobre Deus."""
+        ),
+        color=discord.Color.blue(),
+    )
+    embed_boas_vindas_homem.set_thumbnail(url=usuario.display_avatar.url)
+    embed_boas_vindas_homem.set_image(url="https://i.imgur.com/Xwjxew6.jpg")
+    embed_boas_vindas_homem.set_footer(text="Bíblia em Foco")
+    return embed_boas_vindas_homem
 
 
 def embed_boas_vindas_mulher(usuario: discord.Member) -> discord.Embed:
-    return _embed_boas_vindas_base(usuario)
+    embed_boas_vindas_mulher = discord.Embed(
+        title="Boas-vindas! É uma alegria ter você conosco.",
+        description=(
+            """ Nosso objetivo é que este servidor seja um espaço de **comunhão** e **crescimento** na sua caminhada com Cristo. Embora nossa base teológica seja **protestante**, nossas portas estão abertas para todos que buscam aprender mais sobre Deus."""
+        ),
+        color=discord.Color.blue(),
+    )
+    embed_boas_vindas_mulher.set_thumbnail(url=usuario.display_avatar.url)
+    embed_boas_vindas_mulher.set_image(url="https://i.imgur.com/Xwjxew6.jpg")
+    embed_boas_vindas_mulher.set_footer(text="Bíblia em Foco")
+    return embed_boas_vindas_mulher
 
 
 def embed_boas_vindas_excecao(usuario: discord.Member) -> discord.Embed:
@@ -244,23 +288,33 @@ async def _executar_etapa(bot, nome: str, etapa, *args):
 # ---------------------------------------------------------------------------
 
 async def _aplicar_cargos(bot, after: discord.Member):
-    if not LISTA_CARGOS_APLICAR:
+    if not LISTA_CARGOS_APLICAR and not LISTA_CARGOS_REMOVER:
         return
-    cargos, faltando = [], []
+
+    adicionar, remover, faltando = [], [], []
+
     for cargo_id in LISTA_CARGOS_APLICAR:
         cargo = after.guild.get_role(cargo_id)
         if cargo is None:
             faltando.append(cargo_id)
         elif cargo not in after.roles:
-            cargos.append(cargo)
+            adicionar.append(cargo)
 
-    if cargos:
-        await after.add_roles(*cargos, reason="Acesso ao servidor")
+    for cargo_id in LISTA_CARGOS_REMOVER:
+        cargo = after.guild.get_role(cargo_id)
+        if cargo is None:
+            faltando.append(cargo_id)
+        elif cargo in after.roles:
+            remover.append(cargo)
+
+    if adicionar:
+        await after.add_roles(*adicionar, reason="Acesso ao servidor")
+    if remover:
+        await after.remove_roles(*remover, reason="Acesso ao servidor")
     if faltando:
         await enviar_logs(
             bot, f"⚠️ Cargos não encontrados em acesso_ao_servidor: `{faltando}`"
         )
-
 
 async def _avisar_threads(after: discord.Member, threads: list[discord.Thread]):
     for t in threads:
@@ -276,7 +330,7 @@ async def _enviar_msg_conversas(bot, after: discord.Member):
     canal = await obter_canal(bot, CHAT_CONVERSAS)
     if canal is None:
         raise RuntimeError("CHAT_CONVERSAS não encontrado")
-    return await canal.send(f"<@{after.id}> acessou o servidor.")
+    return await canal.send(f"<@{after.id}> entrou no servidor.")
 
 
 async def _apagar_mensagens_botao(threads: list[discord.Thread]):
@@ -294,9 +348,9 @@ async def _achar_mensagem_acesso(
 ):
     """
     Procura nas últimas mensagens de CHAT_CONVERSAS a mensagem do bot dizendo que
-    a pessoa acessou. Se não achar, procura mensagem da SAPPHIRE marcando o novato.
+    a pessoa entrou. Se não achar, procura mensagem da SAPPHIRE marcando o novato.
     """
-    texto_esperado = f"<@{after.id}> acessou o servidor."
+    texto_esperado = f"<@{after.id}> entrou no servidor."
     mensagens = [m async for m in canal.history(limit=MENSAGENS_PARA_ACHAR_ACESSO)]
 
     for m in mensagens:
@@ -305,7 +359,7 @@ async def _achar_mensagem_acesso(
 
     for m in mensagens:
         eh_sapphire = (
-            (ID_BOT_SAPPHIRE and m.author.id == ID_BOT_SAPPHIRE)
+            (SAPPHIRE and m.author.id == SAPPHIRE)
             or (m.author.bot and "sapphire" in m.author.name.lower())
         )
         if eh_sapphire and (
@@ -321,8 +375,6 @@ async def _criar_thread_acolhimento(
     canal = await obter_canal(bot, CHAT_CONVERSAS)
     if canal is None:
         raise RuntimeError("CHAT_CONVERSAS não encontrado")
-
-    await asyncio.sleep(5)
 
     sufixo = f" • {after.id}"
     nome = after.display_name[: 100 - len(sufixo)] + sufixo
@@ -417,46 +469,15 @@ async def acesso_ao_servidor(bot, after: discord.Member):
     _em_processamento.add(after.id)
 
     try:
-        # 1) cargos
+        # 1) cargos adicionados e removidos
         await _executar_etapa(bot, "aplicar cargos", _aplicar_cargos, bot, after)
 
-        # 2) procurar tópicos em CHAT_CONVITES e CHAT_REGRAS_TICKET_DE_ENTRADA
-        async def _buscar(canal_id):
-            canal = await obter_canal(bot, canal_id)
-            if canal is None:
-                raise RuntimeError(f"Canal {canal_id} não encontrado")
-            return await buscar_threads_por_id(canal, after.id)
-
-        threads_convites = await _executar_etapa(
-            bot, "buscar tópicos (convites)", _buscar, CHAT_CONVITES
-        )
-        threads_tickets = await _executar_etapa(
-            bot, "buscar tópicos (ticket de entrada)", _buscar, CHAT_REGRAS_TICKET_DE_ENTRADA
-        )
-
-        todas = {t.id: t for t in (threads_convites or []) + (threads_tickets or [])}
-        await _executar_etapa(bot, "avisar nos tópicos", _avisar_threads, after, list(todas.values()))
-
-        # 3) após 2 segundos, avisa em CHAT_CONVERSAS
-        await asyncio.sleep(2)
+        # 2) mensagem no chat de conversas
         msg_acesso = await _executar_etapa(
             bot, "mensagem em conversas", _enviar_msg_conversas, bot, after
         )
 
-        # 4) ticket de entrada: avisar se não achou, apagar mensagem do botão
-        if threads_tickets is not None:
-            if not threads_tickets:
-                await enviar_logs(
-                    bot,
-                    f"⚠️ Nenhum tópico com o id `{after.id}` ({after.mention}) foi "
-                    f"encontrado em <#{CHAT_REGRAS_TICKET_DE_ENTRADA}>.",
-                )
-            else:
-                await _executar_etapa(
-                    bot, "apagar mensagem do botão", _apagar_mensagens_botao, threads_tickets
-                )
-
-        # 5) painel de configuração
+        # painel de configuração (lido uma vez, usado nos passos 3 e 4)
         cfg = await _executar_etapa(
             bot,
             "ler painel de configuração",
@@ -465,7 +486,11 @@ async def acesso_ao_servidor(bot, after: discord.Member):
             ["ping_acolhimento_conversas", "minutos_ping_acolhimento", "boas_vindas_focus"],
         ) or {}
 
-        # 5.1) thread de acolhimento (padrão: off)
+        # 3) mensagem no chat de boas-vindas (padrão: off; ignora bots)
+        if cfg.get("boas_vindas_focus") == "on" and not after.bot:
+            await _executar_etapa(bot, "boas-vindas", _enviar_boas_vindas, bot, after)
+
+        # 4) thread privada no chat de conversas (padrão: off)
         if cfg.get("ping_acolhimento_conversas") == "on":
             try:
                 minutos = int(cfg.get("minutos_ping_acolhimento", MINUTOS_PING_PADRAO))
@@ -484,9 +509,38 @@ async def acesso_ao_servidor(bot, after: discord.Member):
                 minutos,
             )
 
-        # 5.2) boas-vindas (padrão: off; ignora bots)
-        if cfg.get("boas_vindas_focus") == "on" and not after.bot:
-            await _executar_etapa(bot, "boas-vindas", _enviar_boas_vindas, bot, after)
+        # 5) por último: procurar tópicos em CHAT_CONVITES e CHAT_REGRAS_TICKET_DE_ENTRADA
+        async def _buscar(canal_id):
+            canal = await obter_canal(bot, canal_id)
+            if canal is None:
+                raise RuntimeError(f"Canal {canal_id} não encontrado")
+            return await buscar_threads_por_id(canal, after.id)
+
+        threads_convites = await _executar_etapa(
+            bot, "buscar tópicos (convites)", _buscar, CHAT_CONVITES
+        )
+        threads_tickets = await _executar_etapa(
+            bot, "buscar tópicos (ticket de entrada)", _buscar, CHAT_REGRAS_TICKET_DE_ENTRADA
+        )
+
+        # avisa em todos os tópicos achados
+        todas = {t.id: t for t in (threads_convites or []) + (threads_tickets or [])}
+        await _executar_etapa(
+            bot, "avisar nos tópicos", _avisar_threads, after, list(todas.values())
+        )
+
+        # ticket de entrada: avisa nos logs se não achou; senão apaga a mensagem do botão
+        if threads_tickets is not None:
+            if not threads_tickets:
+                await enviar_logs(
+                    bot,
+                    f"⚠️ Nenhum tópico com o id `{after.id}` ({after.mention}) foi "
+                    f"encontrado em <#{CHAT_REGRAS_TICKET_DE_ENTRADA}>.",
+                )
+            else:
+                await _executar_etapa(
+                    bot, "apagar mensagem do botão", _apagar_mensagens_botao, threads_tickets
+                )
 
     finally:
         _em_processamento.discard(after.id)

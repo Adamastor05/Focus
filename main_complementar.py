@@ -46,8 +46,11 @@ from comandos.events.listeners.on_ready import registrar_evento_on_ready
 registrar_evento_on_ready(bot)
 
 # VERSÃO 3.2 -----------------------------------------
-from comandos.slash.resumir_conversa import registrar_comando_resumir_conversa, VALENTES
-registrar_comando_resumir_conversa(bot, VALENTES)
+from comandos.slash.resumir_conversa import registrar_comando_resumir_conversa
+registrar_comando_resumir_conversa(bot)
+
+from sistemas.entrada.acesso_ao_servidor import registrar as registrar_acesso
+from sistemas.entrada.botao_acesso import registrar_botao_acesso
 
 #region ;Ping e on_ready
 
