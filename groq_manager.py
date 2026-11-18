@@ -1,4 +1,5 @@
 import os
+import re
 import base64
 
 from groq import AsyncGroq
@@ -80,6 +81,11 @@ async def analisar_imagem(
 
     return resposta.choices[0].message.content
 
+
+# ============================================================
+# FUNÇÃO PARA ANÁLISE DE TEXTO (RESPOSTA EM JSON)
+# ============================================================
+
 async def analisar_texto(prompt: str):
     """
     Envia apenas texto para a Groq (sem imagem).
@@ -104,3 +110,42 @@ async def analisar_texto(prompt: str):
     )
 
     return resposta.choices[0].message.content
+
+
+# ============================================================
+# FUNÇÃO PARA GERAR TEXTO LIVRE (RESPOSTA EM TEXTO NORMAL)
+# ============================================================
+
+async def gerar_texto(prompt: str) -> str:
+    """
+    Envia apenas texto para a Groq e devolve a resposta
+    em texto normal (sem JSON).
+
+    Usada, por exemplo, pelo /resumir_conversa.
+    O prompt também fica fora deste arquivo.
+    """
+
+    resposta = await groq_client.chat.completions.create(
+        model="qwen/qwen3.6-27b",
+
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+
+        temperature=0.3
+    )
+
+    texto = resposta.choices[0].message.content or ""
+
+    # Remove o bloco de raciocínio, caso o modelo devolva
+    texto = re.sub(
+        r"<think>.*?</think>",
+        "",
+        texto,
+        flags=re.DOTALL
+    )
+
+    return texto.strip()

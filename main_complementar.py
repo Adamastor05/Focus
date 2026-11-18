@@ -45,6 +45,10 @@ sistemas.manipular_cargos.slash.salvar_cargos_thread.setup(bot)
 from comandos.events.listeners.on_ready import registrar_evento_on_ready
 registrar_evento_on_ready(bot)
 
+# VERSÃO 3.2 -----------------------------------------
+from comandos.slash.resumir_conversa import registrar_comando_resumir_conversa, VALENTES
+registrar_comando_resumir_conversa(bot, VALENTES)
+
 #region ;Ping e on_ready
 
 @bot.command()

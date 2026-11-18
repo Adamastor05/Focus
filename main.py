@@ -377,4 +377,8 @@ sistemas.manipular_cargos.slash.salvar_cargos_thread.setup(bot)
 from comandos.events.listeners.on_ready import registrar_evento_on_ready
 registrar_evento_on_ready(bot)
 
+from comandos.slash.resumir_conversa import registrar_comando_resumir_conversa
+registrar_comando_resumir_conversa(bot)
+
+
 bot.run(TOKEN)

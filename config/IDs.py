@@ -1,66 +1,10 @@
-
-#region 💬 CHATS E THREADS
-chat_convites = 1347727627104030747
-chat_ticket = 1517166503584202965 #atualmente é o chat "regras" (06/09/2026)
-chat_ticket_apolo = 1520967600417542244
-chat_registro = 1435803255060955136
-chat_punicoes = 1385423723796107395
-chat_logs = 1523110468124803204
-chat_logs_thread_motivos = 1524822398149595316
-chat_logs_thread_fotos = 1539444442489032756
-chat_logs_thread_boosters = 1539463668310483005
-chat_logs_threads_apelidos_DDD = 1542351873938300928
-chat_logs_thread_analise_de_imagens = 1549257351285182604
-chat_conversas = 1347727626910826550
-chat_mensagem_do_dia = 1455697665772748810
-chat_thread_ddd_logs = 1545924442666835978
-chat_thread_agendar_msgs = 1546375907181338754
-chat_thread_passar_direto = 1549406253606895696
-#endregion
-
-
-#region 📞 CALLS
-eden = 1437623938166558782
-getsemani = 1432201092778819767
-sinai = 1461791125902725283
-oliveiras = 1538199427393527828
-jaco = 1414045262783053924
-laai_roi = 1537998563659874404
-salmos = 1538198570900131860
-canticos = 1538204120073248768
-#endregion
-
-#region 👤PESSOAS E BOTS
-invite_tracker_bot = 720351927581278219
-#endregion
-
-#region 👥👥 CARGOS GERAIS
-valentes = 1347727626512367724
-cargo_pedir_acesso = 1517346084895195236
-cargo_ver_chat_explicacao = 1523156945287250053
-a_verificar = 1485807461863788584
-cargo_verificado = 1485807343793868931
-cargo_conta_suspeita = 1457175374772568177
-cargo_recepcionista = 1419489233940512828
-cargo_sem_acesso = 1496681162825928704
-cargo_booster = 1466245562138624177
-cargo_destaque_do_dia = 1453468077084905627
-conquista_a_fundacao = 1446897806735314987
-ping_staff = 1385429423754444882
-cargo_CC = 1447060338242490561
-cargo_membro = 1347727626525216902
-cargo_divisoria_caracteristicas = 1347727626512367719
-cargo_divisoria_conquistas = 1357876891322814616
-cargo_divisoria_pings = 1347727626512367725
-cargo_tempo = 1518666285406359743
-#endregion
-
 #region Servidores
 BIBLIA_EM_FOCO = 1347727626088878151
 
 #region 🪧 Cargos de EXIBIÇÃO
 CARGO_ADM = 1347727626558636150
 CARGO_MODERADOR = 1347727626558636149
+CARGO_PEDIR_ACESSO = 1517346084895195236
 CARGO_FORASTEIROS = 1439416754903322695 #🐪
 CARGO_DISCIPULOS = 1425322037110374450 #🌿
 CARGO_REMANESCENTES = 1563143826284224522 #🪔
@@ -112,6 +56,8 @@ outros_protestantes = [
 ]
 #endregion
 
+
+#---------------------------💬💬💬💬💬----------------------------
 #region Chat de LOGS
 CHAT_LOGS = 1523110468124803204
 CHAT_LOGS_COMPOSTO = [1523110468124803204, 1570496428369903756]
@@ -120,12 +66,80 @@ CHAT_THREAD_LOGS_BOOSTER = 1570526370646204547
 
 #region Logs de Configuração
 CHAT_PAINEL_DE_CONFIGURACAO = 1570186567471865956
-CHAT_THREAD_DM_FECHADA = 1565365392002781214
+CHAT_AGENDAMENTOS = 1563264343083061451
 CHAT_THREAD_LOGS_BOOSTS_POR_PESSOA = 1570531845249175562
 #endregion
 
+#region Cargos salvos
+CHAT_THREAD_DM_FECHADA = 1565365392002781214
+#endregion
+
 #region Chats
+CHAT_BOAS_VINDAS_NOVO = 1572439406227361923
 CHAT_DDD = 1455697665772748810
 CHAT_AVISO_DDD = 1461504089816039526
 CHAT_CONVITES = 1347727627104030747 #📬
 CHAT_REGRAS_TICKET_DE_ENTRADA = 1517166503584202965
+CHAT_CONVERSAS = 1347727626910826550
+
+
+#region Antigos
+
+#region 💬 CHATS E THREADS
+chat_convites = 1347727627104030747
+chat_ticket = CHAT_REGRAS_TICKET_DE_ENTRADA #atualmente é o chat "regras" (06/09/2026)
+chat_ticket_apolo = 1520967600417542244
+chat_registro = 1435803255060955136
+chat_punicoes = 1385423723796107395
+chat_logs = 1523110468124803204
+chat_logs_thread_motivos = 1524822398149595316
+chat_logs_thread_fotos = 1539444442489032756
+chat_logs_thread_boosters = 1539463668310483005
+chat_logs_threads_apelidos_DDD = 1542351873938300928
+chat_logs_thread_analise_de_imagens = 1549257351285182604
+chat_conversas = CHAT_CONVERSAS
+chat_mensagem_do_dia = 1455697665772748810
+chat_thread_ddd_logs = 1545924442666835978
+chat_thread_agendar_msgs = 1546375907181338754
+chat_thread_passar_direto = 1549406253606895696
+#endregion
+
+
+#region 📞 CALLS
+eden = 1437623938166558782
+getsemani = 1432201092778819767
+sinai = 1461791125902725283
+oliveiras = 1538199427393527828
+jaco = 1414045262783053924
+laai_roi = 1537998563659874404
+salmos = 1538198570900131860
+canticos = 1538204120073248768
+#endregion
+
+#region 👤PESSOAS E BOTS
+invite_tracker_bot = 720351927581278219
+#endregion
+
+#region 👥👥 CARGOS GERAIS
+valentes = 1347727626512367724
+cargo_pedir_acesso = CARGO_PEDIR_ACESSO
+cargo_ver_chat_explicacao = 1523156945287250053
+a_verificar = 1485807461863788584
+cargo_verificado = 1485807343793868931
+cargo_conta_suspeita = 1457175374772568177
+cargo_recepcionista = 1419489233940512828
+cargo_sem_acesso = 1496681162825928704
+cargo_booster = 1466245562138624177
+cargo_destaque_do_dia = 1453468077084905627
+conquista_a_fundacao = 1446897806735314987
+ping_staff = 1385429423754444882
+cargo_CC = 1447060338242490561
+cargo_membro = 1347727626525216902
+cargo_divisoria_caracteristicas = 1347727626512367719
+cargo_divisoria_conquistas = 1357876891322814616
+cargo_divisoria_pings = 1347727626512367725
+cargo_tempo = 1518666285406359743
+#endregion
+#endregion
+
+
