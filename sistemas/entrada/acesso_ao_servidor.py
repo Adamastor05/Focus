@@ -157,23 +157,6 @@ def embed_boas_vindas_excecao(usuario: discord.Member) -> discord.Embed:
 
 
 # ---------------------------------------------------------------------------
-# MENSAGENS DE AGENDAMENTO EXTRAS (você vai preencher depois)
-# Retorne o texto da mensagem. Se retornar vazio, nada é enviado.
-# ---------------------------------------------------------------------------
-
-def texto_agendamento_extra_1(
-    usuario: discord.Member, msg_boas_vindas: discord.Message
-) -> str:
-    return ""
-
-
-def texto_agendamento_extra_2(
-    usuario: discord.Member, msg_boas_vindas: discord.Message
-) -> str:
-    return ""
-
-
-# ---------------------------------------------------------------------------
 # UTILIDADES
 # ---------------------------------------------------------------------------
 
@@ -282,6 +265,36 @@ async def _executar_etapa(bot, nome: str, etapa, *args):
         )
         return None
 
+# ---------------------------------------------------------------------------
+# MENSAGENS DE AGENDAMENTO EXTRAS (você vai preencher depois)
+# Retorne o texto da mensagem. Se retornar vazio, nada é enviado.
+# ---------------------------------------------------------------------------
+
+def texto_agendamento_extra_1(
+    usuario: discord.Member, msg_boas_vindas: discord.Message
+) -> str:
+    return ""
+
+
+def texto_agendamento_extra_2(
+    usuario: discord.Member, msg_boas_vindas: discord.Message
+) -> str:
+    return ""
+
+# (será no ponto 6) usar agendamento para remover cargo de novato
+async def agendar_tirar_novato(bot, user_id: int) -> str:
+    agendar_remover_novatos = (
+        "AGENDAR: CARGOS\n"
+        "QUANDO: +24h\n"
+        "SE_PASSAR: PROSSEGUIR\n"
+        "MOTIVO: Remover cargo de novato.\n"
+        f"PESSOA: {user_id}\n"
+        f"CARGO: {CARGO_NOVATOS}\n"
+        "AÇÃO: REMOVER\n"
+        "SERVIDOR: 1347727626088878151"
+    )
+
+    return agendar_remover_novatos
 
 # ---------------------------------------------------------------------------
 # ETAPAS
@@ -542,6 +555,28 @@ async def acesso_ao_servidor(bot, after: discord.Member):
                     bot, "apagar mensagem do botão", _apagar_mensagens_botao, threads_tickets
                 )
 
+        # 6) usar agendamento para remover cargo de novato
+        # Função auxiliar para agendamento
+        async def _agendar(bot, user_id):
+            mensagem = await agendar_tirar_novato(bot, user_id)
+
+            canal_agenda = await obter_canal(bot, CHAT_AGENDAMENTOS)
+
+            if canal_agenda is None:
+                raise RuntimeError("CHAT_AGENDAMENTOS não encontrado")
+
+            await canal_agenda.send(mensagem)
+
+        
+        await _executar_etapa(
+            bot,
+            "agendar remoção do cargo de novato",
+            _agendar,
+            bot,
+            after.id,
+        )
+
+    
     finally:
         _em_processamento.discard(after.id)
 
