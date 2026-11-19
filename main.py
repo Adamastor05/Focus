@@ -383,4 +383,6 @@ registrar_comando_resumir_conversa(bot)
 from sistemas.entrada.acesso_ao_servidor import registrar as registrar_acesso
 from sistemas.entrada.botao_acesso import registrar_botao_acesso
 
+from sistemas.agendamentos.gerenciador_agendamentos import rodar_agendamentos
+
 bot.run(TOKEN)

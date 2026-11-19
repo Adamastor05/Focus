@@ -413,9 +413,9 @@ async def _criar_thread_acolhimento(
     if canal_agenda is None:
         raise RuntimeError("CHAT_AGENDAMENTOS não encontrado")
     await canal_agenda.send(
-        "Agendar apagar_thread\n"
-        f"Thread: {thread.jump_url}\n"
+        "AGENDAR: DELETAR_THREAD\n"
         f"Quando: {formatar_quando(timedelta(minutes=minutos))}"
+        f"Link: {thread.jump_url}\n"
     )
     return True
 
@@ -444,7 +444,7 @@ async def _enviar_boas_vindas(bot, after: discord.Member):
         raise RuntimeError("CHAT_AGENDAMENTOS não encontrado")
 
     await canal_agenda.send(
-        "agendar deletar_mensagem\n"
+        "AGENDAR: DELETAR_MENSAGEM\n"
         f"link: {msg.jump_url}\n"
         f"quando: {formatar_quando(timedelta(days=1))}"
     )

@@ -1,18 +1,24 @@
 import asyncio
 
-from comandos.events.agendar_mensagens import iniciar_agendador
+# --- eventos / tarefas ---
+from sistemas.agendamentos.gerenciador_agendamentos import rodar_agendamentos
 from comandos.events.aparicoes_diarias import iniciar_tarefa_aparicoes_diarias
-from comandos.events.prodigos import iniciar_tarefa_prodigos
 from comandos.events.apagar_sapphire_thread import verificar_thread_sapphire
-from sistemas.entrada.acesso_ao_servidor import registrar as registrar_acesso   # v3.2
-from sistemas.entrada.botao_acesso import registrar_botao_acesso                 # v3.2
-from config.IDs import chat_conversas, chat_logs, chat_thread_agendar_msgs
+from comandos.events.prodigos import iniciar_tarefa_prodigos
+
+# --- sistema de acesso ao servidor ---
+from sistemas.entrada.acesso_ao_servidor import registrar as registrar_acesso
+from sistemas.entrada.botao_acesso import registrar_botao_acesso
+from sistemas.entrada.forcar_acesso import registrar_forcar_acesso
+
+# --- config ---
+from config.IDs import chat_logs
 from config.versao import VERSAO_ATUAL
 
 
 agendador_mensagens_task = None
 aparicoes_diarias_task = None
-acesso_registrado = False                                                      # v3.2
+acesso_registrado = False
 
 
 def registrar_evento_on_ready(bot):
@@ -20,13 +26,34 @@ def registrar_evento_on_ready(bot):
     async def on_ready():
 
         global agendador_mensagens_task
-        global acesso_registrado                                               # v3.2
+        global aparicoes_diarias_task
+        global acesso_registrado
 
-        # NOVO: registrar antes do sync (on_ready pode rodar mais de uma vez)
+        # ============================================================
+        # AGENDAMENTOS
+        # Iniciado logo no começo para que um erro em qualquer coisa
+        # abaixo não impeça o sistema de ligar. (on_ready pode rodar
+        # mais de uma vez, por isso a trava com a task.)
+        # ============================================================
+
+        if (
+            agendador_mensagens_task is None
+            or agendador_mensagens_task.done()
+        ):
+            agendador_mensagens_task = asyncio.create_task(
+                rodar_agendamentos(bot)
+            )
+
+        # ============================================================
+        # SISTEMA DE ACESSO (registrar ANTES do sync;
+        # on_ready pode rodar mais de uma vez, por isso a trava)
+        # ============================================================
+
         if not acesso_registrado:
             acesso_registrado = True
-            registrar_acesso(bot)
-            await registrar_botao_acesso(bot)
+            registrar_acesso(bot)              # aviso de mensagens nas threads de acolhimento
+            await registrar_botao_acesso(bot)  # /acesso_servidor_focus + botão persistente
+            registrar_forcar_acesso(bot)       # /forçar_acesso
 
         await bot.tree.sync()
 
@@ -42,24 +69,8 @@ def registrar_evento_on_ready(bot):
 
         await verificar_thread_sapphire(bot)
 
-        # AGENDADOR DE MENSAGENS
-        if (
-            agendador_mensagens_task is None
-            or agendador_mensagens_task.done()
-        ):
-
-            agendador_mensagens_task = asyncio.create_task(
-                iniciar_agendador(
-                    bot,
-                    chat_thread_agendar_msgs,
-                    chat_conversas,
-                    chat_logs
-                )
-            )
-
         #region APARIÇÕES DIÁRIAS ------------
 
-        global aparicoes_diarias_task
         if (
             aparicoes_diarias_task is None
             or aparicoes_diarias_task.done()
@@ -71,3 +82,4 @@ def registrar_evento_on_ready(bot):
 
         #region Pródigos
         iniciar_tarefa_prodigos(bot)
+        #endregion
