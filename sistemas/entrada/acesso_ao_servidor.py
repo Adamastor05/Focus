@@ -144,7 +144,7 @@ def embed_boas_vindas_mulher(usuario: discord.Member) -> discord.Embed:
         color=discord.Color.blue(),
     )
     embed_boas_vindas_mulher.set_thumbnail(url=usuario.display_avatar.url)
-    embed_boas_vindas_mulher.set_image(url="https://i.imgur.com/Xwjxew6.jpg")
+    embed_boas_vindas_mulher.set_image(url="https://i.imgur.com/QmszKZX.jpeg")
     embed_boas_vindas_mulher.set_footer(text="Bíblia em Foco")
     return embed_boas_vindas_mulher
 
