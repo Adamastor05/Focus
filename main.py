@@ -385,4 +385,13 @@ from sistemas.entrada.botao_acesso import registrar_botao_acesso
 
 from sistemas.agendamentos.gerenciador_agendamentos import rodar_agendamentos
 
+from sistemas.entrada.acesso_verificar import acesso_ao_verificar
+acesso_ao_verificar(bot)
+
+from sistemas.apresentacoes.ping_acolhimento import registrar_evento_on_thread_create
+registrar_evento_on_thread_create(bot)
+
+from sistemas.apresentacoes.apagar_thread_acolhimento import registrar_evento_atualizar_agendamento
+registrar_evento_atualizar_agendamento(bot)
+
 bot.run(TOKEN)

@@ -41,7 +41,8 @@ from config.IDs import (
     CARGO_DIVISORIA_PINGS,
     CARGO_TEMPO,
     CARGO_NOVATOS,
-    SAPPHIRE
+    SAPPHIRE,
+    CARGO_ACOLHIMENTO
 )
 
 logger = logging.getLogger(__name__)
@@ -66,10 +67,6 @@ LISTA_CARGOS_REMOVER: list[int] = [
     CARGO_A_VERIFICAR,
     CARGO_VER_CHAT_EXPLICACAO
 ]
-
-
-# Cargo marcado na thread de acolhimento.
-CARGO_ACOLHIMENTO = 1555543123638231120
 
 # Id do bot SAPPHIRE (usado para achar a mensagem de entrada como alternativa).
 # Se deixar 0, o bot procura por autor bot com "sapphire" no nome.
@@ -416,6 +413,7 @@ async def _criar_thread_acolhimento(
 
     await thread.send(
         content=f"<@&{CARGO_ACOLHIMENTO}>",
+        #content=f"<@896220143808544800>", # Marcar o Jeftoide (testes apenas)
         embed=embed,
         allowed_mentions=discord.AllowedMentions(roles=True),
     )
@@ -427,8 +425,11 @@ async def _criar_thread_acolhimento(
         raise RuntimeError("CHAT_AGENDAMENTOS não encontrado")
     await canal_agenda.send(
         "AGENDAR: DELETAR_THREAD\n"
-        f"Quando: {formatar_quando(timedelta(minutes=minutos))}"
-        f"Link: {thread.jump_url}\n"
+        f"Quando: {formatar_quando(timedelta(minutes=minutos))}\n"
+        f"Motivo: Apagar thread do ping de acolhimento de {after.id}.\n"
+        "Se_passar: prosseguir\n"
+        " \n"
+        f"Link: {thread.jump_url}"
     )
     return True
 

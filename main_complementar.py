@@ -29,7 +29,7 @@ bot = commands.Bot(command_prefix=";", intents=intents, help_command=None)
 
 # VERSÃO 3.1 -------------------------------------------
 
-import comandos.events.contador_emojis
+""" import comandos.events.contador_emojis
 comandos.events.contador_emojis.registrar(bot)
 
 import comandos.events.booster_logs
@@ -43,20 +43,27 @@ sistemas.manipular_cargos.slash.salvar_cargos_thread.setup(bot)
 # e lembre de dar o sync da árvore (await bot.tree.sync()) depois de registrar
 
 from comandos.events.listeners.on_ready import registrar_evento_on_ready
-registrar_evento_on_ready(bot)
+registrar_evento_on_ready(bot) """
 
 # VERSÃO 3.2 -----------------------------------------
-from comandos.slash.resumir_conversa import registrar_comando_resumir_conversa
+""" from comandos.slash.resumir_conversa import registrar_comando_resumir_conversa
 registrar_comando_resumir_conversa(bot)
 
 from sistemas.entrada.acesso_ao_servidor import registrar as registrar_acesso
-from sistemas.entrada.botao_acesso import registrar_botao_acesso
+from sistemas.entrada.botao_acesso import registrar_botao_acesso """
 
+# VERSÃO 3.4
+from sistemas.entrada.acesso_verificar import acesso_ao_verificar
+acesso_ao_verificar(bot)
+
+from sistemas.apresentacoes.ping_acolhimento import registrar_evento_on_thread_create
+registrar_evento_on_thread_create(bot)
 
 #region ;Ping e on_ready
 
 @bot.command()
 async def ping(ctx):
+    await asyncio.sleep(0.5)
     await ctx.send(f"""-# {VERSAO_ATUAL} complementar""")
 
 from config.IDs import CHAT_LOGS

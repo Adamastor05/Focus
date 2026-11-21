@@ -1,25 +1,24 @@
 import asyncio
 import discord
 
+canais_ping_novo_forum = [
+    1387612050917953676, #pedidos de oracao
+    1432187527447711825, #pregações
+    1417906970706579599, #leitura diária
+    1367167818117681305, #dúvidas
+    1353534352474247168, #temas gerais
+    1387978457635356693, #debates
+    1517362589385097326, #artes
+    1347727626910826554, #divulgação
+    1440861614025740308, #louvores
+]
+canal_apresentacoes = 1363009444111188129
+cargo_apresentado = 1455035687156973788
 
 def registrar_evento_on_thread_create(
     bot,
     chat_logs: int
 ):
-      
-    canais_ping_novo_forum = [
-        1387612050917953676, #pedidos de oracao
-        1432187527447711825, #pregações
-        1417906970706579599, #leitura diária
-        1367167818117681305, #dúvidas
-        1353534352474247168, #temas gerais
-        1387978457635356693, #debates
-        1517362589385097326, #artes
-        1347727626910826554, #divulgação
-        1440861614025740308, #louvores
-    ]
-    canal_apresentacoes = 1363009444111188129
-    cargo_apresentado = 1455035687156973788
 
     @bot.event
     async def on_thread_create(thread: discord.Thread):
@@ -81,7 +80,7 @@ def registrar_evento_on_thread_create(
                 await canal_logs.send(embed=embed)
             return
         #endregion
-        #region Marcar Ping Recepcionistas
+        """ #region Marcar Ping Recepcionistas
         if thread.parent.id == canal_apresentacoes:
 
             await thread.send(
@@ -128,5 +127,5 @@ def registrar_evento_on_thread_create(
                     inline=False
                 )
                 await canal_logs.send(embed=embed)
-                #endregion
+                #endregion """
     #endregion
