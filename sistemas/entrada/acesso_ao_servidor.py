@@ -123,7 +123,7 @@ def _embed_boas_vindas_base(usuario: discord.Member) -> discord.Embed:
 
 def embed_boas_vindas_homem(usuario: discord.Member) -> discord.Embed:
     embed_boas_vindas_homem = discord.Embed(
-        title="Boas-vindas! É uma alegria ter você conosco.",
+        title="Bem-vindo! É uma alegria ter você conosco.",
         description=(
             """ Nosso objetivo é que este servidor seja um espaço de **comunhão** e **crescimento** na sua caminhada com Cristo. Embora nossa base teológica seja **protestante**, nossas portas estão abertas para todos que buscam aprender mais sobre Deus."""
         ),
@@ -137,7 +137,7 @@ def embed_boas_vindas_homem(usuario: discord.Member) -> discord.Embed:
 
 def embed_boas_vindas_mulher(usuario: discord.Member) -> discord.Embed:
     embed_boas_vindas_mulher = discord.Embed(
-        title="Boas-vindas! É uma alegria ter você conosco.",
+        title="Bem-vinda! É uma alegria ter você conosco.",
         description=(
             """ Nosso objetivo é que este servidor seja um espaço de **comunhão** e **crescimento** na sua caminhada com Cristo. Embora nossa base teológica seja **protestante**, nossas portas estão abertas para todos que buscam aprender mais sobre Deus."""
         ),
