@@ -16,7 +16,7 @@ Comando de prefixo `;acesso verificar` + listener de CARGO_VERIFICADO.
 
 No on_ready (antes do bot.tree.sync()):
 
-    from sistemas.entrada.acesso_verificar import acesso_ao_verificar
+    from sistemas.acesso.acesso_verificar import acesso_ao_verificar
     acesso_ao_verificar(bot)
 """
 
@@ -33,7 +33,7 @@ from config.IDs import (
     CARGO_VERIFICADO,
     CHAT_CONVITES,
 )
-from sistemas.entrada.acesso_ao_servidor import (
+from sistemas.acesso.acesso_ao_servidor import (
     acesso_ao_servidor,
     buscar_threads_por_id,
     enviar_logs,

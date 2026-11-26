@@ -18,7 +18,7 @@ import logging
 import discord
 from discord import app_commands
 
-from sistemas.entrada.acesso_ao_servidor import acesso_ao_servidor
+from sistemas.acesso.acesso_ao_servidor import acesso_ao_servidor
 from config.IDs import CARGO_ADM, CARGO_FOCUS_ADM, CARGO_TRIAGEM
 
 logger = logging.getLogger(__name__)

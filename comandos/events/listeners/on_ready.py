@@ -7,9 +7,9 @@ from comandos.events.apagar_sapphire_thread import verificar_thread_sapphire
 from comandos.events.prodigos import iniciar_tarefa_prodigos
 
 # --- sistema de acesso ao servidor ---
-from sistemas.entrada.acesso_ao_servidor import registrar as registrar_acesso
-from sistemas.entrada.botao_acesso import registrar_botao_acesso
-from sistemas.entrada.forcar_acesso import registrar_forcar_acesso
+from sistemas.acesso.acesso_ao_servidor import registrar as registrar_acesso
+from sistemas.acesso.botao_acesso import registrar_botao_acesso
+from sistemas.acesso.forcar_acesso import registrar_forcar_acesso
 
 # --- config ---
 from config.IDs import chat_logs

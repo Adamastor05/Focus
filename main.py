@@ -380,18 +380,23 @@ registrar_evento_on_ready(bot)
 from comandos.slash.resumir_conversa import registrar_comando_resumir_conversa
 registrar_comando_resumir_conversa(bot)
 
-from sistemas.entrada.acesso_ao_servidor import registrar as registrar_acesso
-from sistemas.entrada.botao_acesso import registrar_botao_acesso
+from sistemas.acesso.acesso_ao_servidor import registrar as registrar_acesso
+from sistemas.acesso.botao_acesso import registrar_botao_acesso
+from sistemas.acesso.acesso_verificar import acesso_ao_verificar
+acesso_ao_verificar(bot)
 
 from sistemas.agendamentos.gerenciador_agendamentos import rodar_agendamentos
-
-from sistemas.entrada.acesso_verificar import acesso_ao_verificar
-acesso_ao_verificar(bot)
 
 from sistemas.apresentacoes.ping_acolhimento import registrar_evento_on_thread_create
 registrar_evento_on_thread_create(bot)
 
 from sistemas.apresentacoes.apagar_thread_acolhimento import registrar_evento_atualizar_agendamento
 registrar_evento_atualizar_agendamento(bot)
+
+from sistemas.entrada.espelhar_ticket import espelhar_ticket_convites
+espelhar_ticket_convites(bot)
+
+from sistemas.conversas_privadas.gerenciador_conversas_privadas import registrar as registrar_conversas_privadas
+registrar_conversas_privadas(bot)
 
 bot.run(TOKEN)

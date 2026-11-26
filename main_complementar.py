@@ -49,11 +49,11 @@ registrar_evento_on_ready(bot) """
 """ from comandos.slash.resumir_conversa import registrar_comando_resumir_conversa
 registrar_comando_resumir_conversa(bot)
 
-from sistemas.entrada.acesso_ao_servidor import registrar as registrar_acesso
-from sistemas.entrada.botao_acesso import registrar_botao_acesso """
+from sistemas.acesso.acesso_ao_servidor import registrar as registrar_acesso
+from sistemas.acesso.botao_acesso import registrar_botao_acesso """
 
 # VERSÃO 3.4
-from sistemas.entrada.acesso_verificar import acesso_ao_verificar
+from sistemas.acesso.acesso_verificar import acesso_ao_verificar
 acesso_ao_verificar(bot)
 
 from sistemas.apresentacoes.ping_acolhimento import registrar_evento_on_thread_create

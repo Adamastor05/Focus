@@ -19,7 +19,7 @@ import discord
 from discord import app_commands
 
 from config.IDs import CARGO_ADM, CARGO_FOCUS_ADM, CARGO_TRIAGEM, CHAT_CONVITES
-from sistemas.entrada.acesso_ao_servidor import (
+from sistemas.acesso.acesso_ao_servidor import (
     acesso_ao_servidor,
     buscar_threads_por_id,
     enviar_logs,
