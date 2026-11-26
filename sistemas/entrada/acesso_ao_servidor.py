@@ -84,6 +84,8 @@ LIMITE_MENSAGENS_PAINEL = 500       # quantas mensagens do painel de configuraç
 LIMITE_MENSAGENS_TICKET = 200       # quantas mensagens de cada thread de ticket olhar
 LIMITE_THREADS_ARQUIVADAS = 500     # quantas threads arquivadas olhar por canal
 MENSAGENS_PARA_ACHAR_ACESSO = 30    # últimas mensagens de CHAT_CONVERSAS a olhar
+EMOJI_ACESSO_THREAD = "🌱"
+LIMITE_NOME_THREAD = 100   # limite de caracteres do nome de uma thread no Discord
 
 try:
     from zoneinfo import ZoneInfo
@@ -433,6 +435,20 @@ async def _criar_thread_acolhimento(
     )
     return True
 
+async def _marcar_threads_convites(threads: list[discord.Thread]):
+    """Coloca 🌱 antes do primeiro caractere do nome dos tópicos de convites."""
+    for t in threads:
+        if t.name.startswith(EMOJI_ACESSO_THREAD):
+            continue  # já está marcado
+
+        novo_nome = EMOJI_ACESSO_THREAD + t.name
+        if len(novo_nome) > LIMITE_NOME_THREAD:
+            continue  # limite de caracteres atingido: não faz nada
+
+        try:
+            await t.edit(name=novo_nome, reason="Acesso ao servidor")
+        except discord.HTTPException as e:
+            logger.warning("Falha ao renomear a thread %s: %s", t.id, e)
 
 def _escolher_embed_boas_vindas(after: discord.Member) -> discord.Embed:
     ids = {r.id for r in after.roles} | set(LISTA_CARGOS_APLICAR)
@@ -568,7 +584,6 @@ async def acesso_ao_servidor(bot, after: discord.Member):
 
             await canal_agenda.send(mensagem)
 
-        
         await _executar_etapa(
             bot,
             "agendar remoção do cargo de novato",
@@ -577,10 +592,17 @@ async def acesso_ao_servidor(bot, after: discord.Member):
             after.id,
         )
 
-    
+        # 7) marca o(s) tópico(s) de convites com 🌱 (depois de tudo)
+        if threads_convites:
+            await _executar_etapa(
+                bot,
+                "marcar tópico de convites",
+                _marcar_threads_convites,
+                threads_convites,
+            )
+
     finally:
         _em_processamento.discard(after.id)
-
 
 # ---------------------------------------------------------------------------
 # AVISO: MENSAGEM EM THREAD DE ACOLHIMENTO (thread trancada)
