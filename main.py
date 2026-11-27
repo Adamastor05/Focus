@@ -301,8 +301,8 @@ from comandos.events.listeners.on_member_update import (
 )
 registrar_evento_on_member_update(bot)
 
-from comandos.events.listeners.on_user_update import registrar_evento_on_user_update
-registrar_evento_on_user_update(bot)
+#from comandos.events.listeners.on_user_update import registrar_evento_on_user_update
+#registrar_evento_on_user_update(bot)
 from comandos.events.listeners.on_member_remove import (
     registrar_evento_on_member_remove,
 )
@@ -396,7 +396,12 @@ registrar_evento_atualizar_agendamento(bot)
 from sistemas.entrada.espelhar_ticket import espelhar_ticket_convites
 espelhar_ticket_convites(bot)
 
-from sistemas.conversas_privadas.gerenciador_conversas_privadas import registrar as registrar_conversas_privadas
-registrar_conversas_privadas(bot)
+#from sistemas.conversas_privadas.gerenciador_conversas_privadas import registrar as registrar_conversas_privadas
+#registrar_conversas_privadas(bot)
+
+from sistemas.analise_pfp.perfil_listeners import registrar_listeners_perfil
+from sistemas.analise_pfp.perfil_fechar import registrar_fechar_perfil
+registrar_listeners_perfil(bot)
+registrar_fechar_perfil(bot)
 
 bot.run(TOKEN)

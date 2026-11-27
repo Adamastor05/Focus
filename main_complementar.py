@@ -53,11 +53,17 @@ from sistemas.acesso.acesso_ao_servidor import registrar as registrar_acesso
 from sistemas.acesso.botao_acesso import registrar_botao_acesso """
 
 # VERSÃO 3.4
-from sistemas.acesso.acesso_verificar import acesso_ao_verificar
+"""from sistemas.acesso.acesso_verificar import acesso_ao_verificar
 acesso_ao_verificar(bot)
 
 from sistemas.apresentacoes.ping_acolhimento import registrar_evento_on_thread_create
-registrar_evento_on_thread_create(bot)
+registrar_evento_on_thread_create(bot)"""
+
+# VERSÃO 3.6.1
+from sistemas.analise_pfp.perfil_listeners import registrar_listeners_perfil
+from sistemas.analise_pfp.perfil_fechar import registrar_fechar_perfil
+registrar_listeners_perfil(bot)
+registrar_fechar_perfil(bot)
 
 #region ;Ping e on_ready
 

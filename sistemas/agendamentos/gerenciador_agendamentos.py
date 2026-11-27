@@ -50,7 +50,7 @@ from zoneinfo import ZoneInfo
 import discord
 
 # Importe aqui os arquivos de cada ação:
-from . import agendar_cargos, agendar_deletar_mensagem, agendar_deletar_thread
+from . import agendar_analise_pfp, agendar_cargos, agendar_deletar_mensagem, agendar_deletar_thread
 
 # ----------------------------------------------------------------------------
 # CONFIGURAÇÃO
@@ -89,6 +89,7 @@ AGENDAMENTOS = {
     "DELETAR_MENSAGEM": agendar_deletar_mensagem.executar,
     "APAGAR_MENSAGEM": agendar_deletar_mensagem.executar,   # apelido da mesma ação
     "CARGOS": agendar_cargos.executar,
+    "ANALISAR_PFP": agendar_analise_pfp.executar,   # reanálise de foto do logs de espera
     # "ENVIAR_MENSAGEM": agendar_enviar_mensagem.executar,
 }
 
