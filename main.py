@@ -404,4 +404,13 @@ from sistemas.analise_pfp.perfil_fechar import registrar_fechar_perfil
 registrar_listeners_perfil(bot)
 registrar_fechar_perfil(bot)
 
+from sistemas.timed_roles import (
+    adicionar_cargo_tempo,
+    remover_cargo_tempo,
+    remover_cargo_tempo_bots,
+)
+adicionar_cargo_tempo.setup(bot)
+remover_cargo_tempo.setup(bot)
+remover_cargo_tempo_bots.setup(bot)
+
 bot.run(TOKEN)

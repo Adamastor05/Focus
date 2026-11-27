@@ -59,11 +59,21 @@ acesso_ao_verificar(bot)
 from sistemas.apresentacoes.ping_acolhimento import registrar_evento_on_thread_create
 registrar_evento_on_thread_create(bot)"""
 
-# VERSÃO 3.6.1
+# VERSÃO 3.6.2
 from sistemas.analise_pfp.perfil_listeners import registrar_listeners_perfil
 from sistemas.analise_pfp.perfil_fechar import registrar_fechar_perfil
 registrar_listeners_perfil(bot)
 registrar_fechar_perfil(bot)
+
+# VERSÃO 3.7
+from sistemas.timed_roles import (
+    adicionar_cargo_tempo,
+    remover_cargo_tempo,
+    remover_cargo_tempo_bots,
+)
+adicionar_cargo_tempo.setup(bot)
+remover_cargo_tempo.setup(bot)
+remover_cargo_tempo_bots.setup(bot)
 
 #region ;Ping e on_ready
 
